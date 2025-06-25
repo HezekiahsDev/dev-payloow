@@ -1,0 +1,2951 @@
+openapi: 3.0.0
+info:
+  title: Revo
+  contact: {}
+  version: '1.0'
+servers:
+  - url: https://api-dev.payloow.com/api
+  - url: http://localhost:4000/api
+  - url: http://localhost:8000/api
+    variables: {}
+paths:
+  /v1/register:
+    post:
+      tags:
+        - User
+      summary: register user
+      operationId: registeruser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/registeruserrequest'
+                - example:
+                    firstName: Wisdom
+                    lastName: Dakoh
+                    password: wisdom
+                    phone: '2347052316803'
+                    email: wisdomdakoh@gmail.com
+                    country: Nigeria
+                    state: Lagos
+                    role: user
+                    address: 123 Example Street, Victoria Island
+            example:
+              firstName: Wisdom
+              lastName: Dakoh
+              password: wisdom
+              phone: '2347052316803'
+              email: wisdomdakoh@gmail.com
+              country: Nigeria
+              state: Lagos
+              role: user
+              address: 123 Example Street, Victoria Island
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /v1/register-super-admin:
+    post:
+      tags:
+        - Admin
+      summary: Register as SuperAdmin
+      operationId: RegisterasSuperAdmin
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/RegisterasSuperAdminRequest'
+                - example:
+                    firstName: Jane
+                    lastName: Smith
+                    password: superAdminPass123
+                    phone: 9876543210
+                    email: jane.smith@example.com
+                    country: Nigeria
+                    state: Abuja
+                    address: 456 Admin Street, Abuja
+            example:
+              firstName: Jane
+              lastName: Smith
+              password: superAdminPass123
+              phone: 9876543210
+              email: jane.smith@example.com
+              country: Nigeria
+              state: Abuja
+              address: 456 Admin Street, Abuja
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /v1/verify-top-up:
+    get:
+      tags:
+        - Admin
+      summary: check which top up provided
+      operationId: checkwhichtopupprovided
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - Account VTU Permission
+      summary: change VTU account
+      operationId: changeVTUaccount
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/changeVTUaccountRequest'
+                - example:
+                    vtu: 1
+            example:
+              vtu: 1
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/login:
+    post:
+      tags:
+        - user Auth
+      summary: login user
+      operationId: loginuser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/loginuserrequest'
+                - example:
+                    phone: '2347052316803'
+                    password: wisdom
+            example:
+              phone: '2347052316803'
+              password: wisdom
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /v1/get-current-user:
+    get:
+      tags:
+        - user Auth
+      summary: get current user
+      operationId: getcurrentuser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/forget-password:
+    post:
+      tags:
+        - user Auth
+      summary: forget password
+      operationId: forgetpassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/forgetpasswordrequest'
+                - example:
+                    email: marvelloussolomon49@gmail.com
+                    deviceType: mobile
+            example:
+              email: marvelloussolomon49@gmail.com
+              deviceType: mobile
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /v1/reset-password:
+    post:
+      tags:
+        - user Auth
+      summary: reset password
+      operationId: resetpassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/resetpasswordrequest'
+                - example:
+                    email: marvelloussolomon49@gmail.com
+                    token: a3091dda44767000836f2d8cd768f0e0
+                    password: marvel12
+                    code: 123456
+            example:
+              email: marvelloussolomon49@gmail.com
+              token: a3091dda44767000836f2d8cd768f0e0
+              password: marvel12
+              code: 123456
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /v1/logout:
+    post:
+      tags:
+        - user Auth
+      summary: logout
+      operationId: logout
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /v1/get-previous-payment-reference:
+    get:
+      tags:
+        - user Auth
+      summary: get previous reference details
+      operationId: getpreviousreferencedetails
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/user/dva:
+    get:
+      tags:
+        - User
+      summary: Get user DVA information
+      operationId: getUserDva
+      parameters: []
+      responses:
+        '200':
+          description: Successfully retrieved user DVA information
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /v1/set-transaction-pin:
+    post:
+      tags:
+        - user Auth
+      summary: Set Transaction pin
+      operationId: SetTransactionpin
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/SetTransactionpinRequest'
+                - example:
+                    pin: '1234'
+            example:
+              pin: '1234'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/change-email:
+    patch:
+      tags:
+        - Settings
+      summary: change Email
+      operationId: changeEmail
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/changeEmailRequest'
+                - example:
+                    email: marvelloussolomon49@gmail.com
+            example:
+              email: marvelloussolomon49@gmail.com
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/change-password:
+    patch:
+      tags:
+        - Settings
+      summary: change password
+      operationId: changepassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/changepasswordrequest'
+                - example:
+                    currentPassword: '123432'
+                    newPassword: '243423'
+            example:
+              currentPassword: '123432'
+              newPassword: '243423'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/update-transaction-pin:
+    patch:
+      tags:
+        - Settings
+      summary: Update transaction PIN
+      operationId: updateTransactionPin
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/updateTransactionPinRequest'
+                - example:
+                    currentPin: '1234'
+                    newPin: '5678'
+            example:
+              currentPin: '1234'
+              newPin: '5678'
+        required: true
+      responses:
+        '200':
+          description: Successfully updated transaction PIN
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /v1/add-profile-picture:
+    post:
+      tags:
+        - Settings
+      summary: upload profile picture
+      operationId: uploadprofilepicture
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+                - image
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/update-profile:
+    patch:
+      tags:
+        - Settings
+      summary: update profile picture
+      operationId: updateprofilepicture
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+                - image
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-bill-details:
+    get:
+      tags:
+        - Bill Payment - Gongozo
+      summary: Get Billers Account Details
+      operationId: GetBillersAccountDetails
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /v1/buy-data:
+    post:
+      tags:
+        - Bill Payment - Gongozo
+      summary: Buy Data
+      operationId: BuyData
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/BuyDataRequest'
+                - example:
+                    network: 1
+                    mobile_number: '09095263835'
+                    plan: 364
+            example:
+              network: 1
+              mobile_number: '09095263835'
+              plan: 364
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /v1/buy-airtime:
+    post:
+      tags:
+        - Bill Payment - Gongozo
+      summary: Buy Airtime and get Top History
+      operationId: BuyAirtimeandgetTopHistory
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          text/plain:
+            schema:
+              type: object
+              example: {}
+            example: {}
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /v1/buy-electricity:
+    post:
+      tags:
+        - Bill Payment - Gongozo
+      summary: Buy Electricity
+      operationId: BuyElectricity
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/BuyElectricityRequest'
+                - example:
+                    disco_name: KEDCO
+                    amount: 500
+                    meter_number: 12345678909876543
+                    MeterType: POSTPAID
+            example:
+              disco_name: KEDCO
+              amount: 500
+              meter_number: 12345678909876543
+              MeterType: POSTPAID
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /v1:
+    get:
+      tags:
+        - Bill Payment - Gongozo
+      summary: Validate IUC
+      operationId: ValidateIUC
+      parameters:
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: Token 66f2e5c39ac8640f13cd888f161385b12f7e5e92
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            enum:
+              - application/json
+            type: string
+            example: application/json
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    post:
+      tags:
+        - Bill Payment - Gongozo
+      summary: Buy Cable and get all transaction
+      operationId: BuyCableandgetalltransaction
+      parameters:
+        - name: Authorization
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: Token 66f2e5c39ac8640f13cd888f161385b12f7e5e92
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/BuyCableandgetalltransactionRequest'
+                - example:
+                    cablename: GOTV
+                    cableplan: '74'
+                    smart_card_number: 234567890
+            example:
+              cablename: GOTV
+              cableplan: '74'
+              smart_card_number: 234567890
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /v1/buy-airtime-vtu:
+    post:
+      tags:
+        - VTU.ng
+      summary: purchase airtime
+      operationId: purchaseairtime
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/purchaseairtimerequest'
+                - example:
+                    phone: '09072336259'
+                    network_id: mtn
+                    amount: '100'
+            example:
+              phone: '09072336259'
+              network_id: mtn
+              amount: '100'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/buy-data-vtu:
+    post:
+      tags:
+        - VTU.ng
+      summary: purchaseData
+      operationId: purchaseData
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/purchaseDataRequest'
+                - example:
+                    phone: '07045461790'
+                    network_id: mtn
+                    variation_id: M1024
+                    amount: '1000'
+            example:
+              phone: '07045461790'
+              network_id: mtn
+              variation_id: M1024
+              amount: '1000'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/buy-electricity-vtu:
+    post:
+      tags:
+        - VTU.ng
+      summary: purchaseElectricity
+      operationId: purchaseElectricity
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/purchaseElectricityRequest'
+                - example:
+                    phone: '09072336259'
+                    meter_number: '62418234034'
+                    service_id: ikeja-electric
+                    variation_id: prepaid
+                    amount: '1000'
+            example:
+              phone: '09072336259'
+              meter_number: '62418234034'
+              service_id: ikeja-electric
+              variation_id: prepaid
+              amount: '1000'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/verify-customer-vtu:
+    post:
+      tags:
+        - VTU.ng
+      summary: verifyCustomer
+      operationId: verifyCustomer
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/verifyCustomerRequest'
+                - example:
+                    customer_id: 4567io0
+                    service_id: ikeja-electric
+                    variation_id: prepaid
+            example:
+              customer_id: 4567io0
+              service_id: ikeja-electric
+              variation_id: prepaid
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/buy-cable-subscription-vtu:
+    post:
+      tags:
+        - VTU.ng
+      summary: purchaseCableTV
+      operationId: purchaseCableTV
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/purchaseCableTVRequest'
+                - example:
+                    phone: '09072336259'
+                    smartcard_number: '23456789876543'
+                    service_id: gotv
+                    variation_id: gotv-max
+            example:
+              phone: '09072336259'
+              smartcard_number: '23456789876543'
+              service_id: gotv
+              variation_id: gotv-max
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-variations-vtu:
+    get:
+      tags:
+        - VTU.ng
+      summary: getVariations
+      operationId: getVariations
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-vtu-providers-wallet-balance:
+    get:
+      tags:
+        - Account VTU Permission
+      summary: get vtu.ng balance
+      operationId: getvtu.ngbalance
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-wallets-balance:
+    get:
+      tags:
+        - FlutterWave Payment
+      summary: get Revo wallet balance
+      operationId: getRevowalletbalance
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/wallet/deposit:
+    post:
+      tags:
+        - Deposit
+      summary: Generate deposit checkout URL
+      operationId: generateDepositCheckoutUrl
+      parameters: []
+      requestBody:
+        description: 'Request body for generating deposit checkout URL'
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/GenerateDepositCheckoutUrlRequest'
+                - example:
+                    amount: 1000
+                    merchant: paystack
+            example:
+              amount: 1000
+              merchant: paystack
+        required: true
+      responses:
+        '200':
+          description: 'Successfully generated checkout URL'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Link Generated
+                  data:
+                    type: string
+                    example: https://checkout.paystack.com/xxxxx
+      security:
+        - bearer: []
+      deprecated: false
+  /v1/transfer:
+    post:
+      tags:
+        - FlutterWave Payment
+      summary: TransferFromWallet
+      operationId: TransferFromWallet
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/TransferFromWalletRequest'
+                - example:
+                    amount: '100'
+                    account_number: '2284474186'
+                    narration: payment for things
+                    account_bank: '057'
+            example:
+              amount: '100'
+              account_number: '2284474186'
+              narration: payment for things
+              account_bank: '057'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-bank-codes:
+    get:
+      tags:
+        - FlutterWave Payment
+      summary: get bank codes
+      operationId: getbankcodes
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/airtime-to-cash:
+    post:
+      tags:
+        - Artime to cash with bingPay
+      summary: airtime to cash
+      operationId: airtimetocash
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/airtimetocashrequest'
+                - example:
+                    amount: 5000
+                    network: 1
+                    phone: '07061785113'
+            example:
+              amount: 5000
+              network: 1
+              phone: '07061785113'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /v1/network-fee:
+    post:
+      tags:
+        - Artime to cash with bingPay
+      summary: network fee
+      operationId: networkfee
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/networkfeerequest'
+                - example:
+                    amount: 5000
+                    network: 4
+            example:
+              amount: 5000
+              network: 4
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /v1/all-networks:
+    get:
+      tags:
+        - Artime to cash with bingPay
+      summary: get all networks and code
+      operationId: getallnetworksandcode
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /v1/create-course-content:
+    post:
+      tags:
+        - Courses
+      summary: add course content
+      operationId: addcoursecontent
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/addcoursecontentrequest'
+                - example:
+                    title: Introduction to Programming in python
+                    description: A comprehensive course on programming fundamentals and patterns.
+                    duration: 9 hours
+                    price: '100'
+                    discount_price: 10
+                    category: Data structures
+                    sections:
+                      - title: 'Section 1: Basics'
+                        description: Introduction to basic programming concepts.
+                        lessons:
+                          - title: What is data structures?
+                            videoUrl: course-videos/chowgoo.mp4eb99400c
+                            duration: 15
+                            order: 1
+                          - title: Variables and Data Types
+                            videoUrl: https://example.com/video2
+                            duration: 10
+                            order: 2
+                    tags:
+                      - programming
+                      - coding
+                      - development
+            example:
+              title: Introduction to Programming in python
+              description: A comprehensive course on programming fundamentals and patterns.
+              duration: 9 hours
+              price: '100'
+              discount_price: 10
+              category: Data structures
+              sections:
+                - title: 'Section 1: Basics'
+                  description: Introduction to basic programming concepts.
+                  lessons:
+                    - title: What is data structures?
+                      videoUrl: course-videos/chowgoo.mp4eb99400c
+                      duration: 15
+                      order: 1
+                    - title: Variables and Data Types
+                      videoUrl: https://example.com/video2
+                      duration: 10
+                      order: 2
+              tags:
+                - programming
+                - coding
+                - development
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/upload-course-video-document:
+    post:
+      tags:
+        - Courses
+      summary: upload-course-video-document
+      operationId: upload-course-video-document
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+                - video
+              type: object
+              properties:
+                video:
+                  type: string
+                  format: binary
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/upload-course-document/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The user ID
+    post:
+      tags:
+        - Courses
+      summary: upload document files
+      operationId: uploaddocumentfiles
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+                - documents
+              type: object
+              properties:
+                documents:
+                  type: string
+                  format: binary
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-course-by-id/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The user ID
+    get:
+      tags:
+        - Courses
+      summary: get all course courses
+      operationId: getallcoursecourses
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/add-to-existing-lessons:
+    patch:
+      tags:
+        - Courses
+      summary: Add course to existing course sections and lesson
+      operationId: Addcoursetoexistingcoursesectionsandlesson
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/AddcoursetoexistingcoursesectionsandlessonRequest'
+                - example:
+                    courseId: 66f28739fe0e9466de66e39c
+                    sections:
+                      - sectionId: 66f28739fe0e9466de66e39e
+                        lessons:
+                          - title: Introduction to Programming in JAVA
+                            videoUrl: https://example.com/video1
+                            duration: 300
+                            order: 1
+                          - title: Variables and Data Types in GO
+                            videoUrl: https://example.com/video2
+                            duration: 450
+                            order: 2
+            example:
+              courseId: 66f28739fe0e9466de66e39c
+              sections:
+                - sectionId: 66f28739fe0e9466de66e39e
+                  lessons:
+                    - title: Introduction to Programming in JAVA
+                      videoUrl: https://example.com/video1
+                      duration: 300
+                      order: 1
+                    - title: Variables and Data Types in GO
+                      videoUrl: https://example.com/video2
+                      duration: 450
+                      order: 2
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/add-course-thumbnail-image:
+    post:
+      tags:
+        - Courses
+      summary: add course thumbails
+      operationId: addcoursethumbails
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+                - image
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-course-questions-by-id/user/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The user ID
+    get:
+      tags:
+        - Courses
+      summary: get all course questions
+      operationId: getallcoursequestions
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/reply-course=questions/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The user ID
+    post:
+      tags:
+        - Courses
+      summary: reply to course questions
+      operationId: replytocoursequestions
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/replytocoursequestionsrequest'
+                - example:
+                    reply: you need to work harder
+            example:
+              reply: you need to work harder
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/create-course-tutor-profile:
+    post:
+      tags:
+        - Tutor Profile
+      summary: create-course-tutor-profile
+      operationId: create-course-tutor-profile
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/create-course-tutor-profile-request'
+                - example:
+                    tutor_name: John Doe
+                    tutor_email: john.doe@example.com
+                    tutor_phone: '08012345678'
+                    tutor_about: Experienced tutor specializing in math and science education.
+                    tutor_image: https://example.com/images/john_doe.jpg
+                    tutor_qualification: MSc in Education
+                    tutor_experience: 10 years of teaching experience in various schools and online platforms.
+                    tutor_achievements: Published research on modern teaching techniques, awarded 'Best Tutor 2023'.
+                    tutor_facebook: https://facebook.com/john.doe
+                    tutor_twitter: https://twitter.com/johndoe
+                    tutor_linkedin: https://linkedin.com/in/johndoe
+                    tutor_instagram: https://instagram.com/johndoe
+            example:
+              tutor_name: John Doe
+              tutor_email: john.doe@example.com
+              tutor_phone: '08012345678'
+              tutor_about: Experienced tutor specializing in math and science education.
+              tutor_image: https://example.com/images/john_doe.jpg
+              tutor_qualification: MSc in Education
+              tutor_experience: 10 years of teaching experience in various schools and online platforms.
+              tutor_achievements: Published research on modern teaching techniques, awarded 'Best Tutor 2023'.
+              tutor_facebook: https://facebook.com/john.doe
+              tutor_twitter: https://twitter.com/johndoe
+              tutor_linkedin: https://linkedin.com/in/johndoe
+              tutor_instagram: https://instagram.com/johndoe
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-course-tutor-profile:
+    get:
+      tags:
+        - Tutor Profile
+      summary: get-course-tutor-profile
+      operationId: get-course-tutor-profile
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-course-tutor-profile-by-id/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The user ID
+    get:
+      tags:
+        - Tutor Profile
+      summary: get-course-tutor-profile-by-id
+      operationId: get-course-tutor-profile-by-id
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/make-course-announcement:
+    post:
+      tags:
+        - Announcements
+      summary: create Course Annoucement
+      operationId: createCourseAnnoucement
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/createCourseAnnoucementRequest'
+                - example:
+                    courseId: 6123abcd4567ef8912345678
+                    title: Course Title
+                    description: This is the course description
+            example:
+              courseId: 6123abcd4567ef8912345678
+              title: Course Title
+              description: This is the course description
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-all-course-announcement/{courseId}:
+    get:
+      tags:
+        - Announcements
+      summary: Get Course Announcement
+      operationId: GetCourseAnnouncement
+      parameters:
+        - name: courseId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/add-course-question:
+    post:
+      tags:
+        - Course Quizes
+      summary: Add Course quiz
+      operationId: AddCoursequiz
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/AddCoursequizRequest'
+                - example:
+                    course_id: 66f28739fe0e9466de66e39c
+                    section_id: 66f28739fe0e9466de66e39e
+                    lesson_id: 66f28739fe0e9466de66e3a0
+                    quiz_title: Sample Quiz on JavaScript Basics
+                    questions:
+                      - question_text: What is the correct way to declare a variable in JavaScript?
+                        options:
+                          - option: var myVar = 5;
+                            is_correct: true
+                          - option: declare myVar = 5;
+                            is_correct: false
+                          - option: let myVar = 5;
+                            is_correct: true
+                          - option: newVar myVar = 5;
+                            is_correct: false
+                      - question_text: Which of the following is not a JavaScript data type?
+                        options:
+                          - option: Number
+                            is_correct: false
+                          - option: String
+                            is_correct: false
+                          - option: Boolean
+                            is_correct: false
+                          - option: Float
+                            is_correct: true
+            example:
+              course_id: 66f28739fe0e9466de66e39c
+              section_id: 66f28739fe0e9466de66e39e
+              lesson_id: 66f28739fe0e9466de66e3a0
+              quiz_title: Sample Quiz on JavaScript Basics
+              questions:
+                - question_text: What is the correct way to declare a variable in JavaScript?
+                  options:
+                    - option: var myVar = 5;
+                      is_correct: true
+                    - option: declare myVar = 5;
+                      is_correct: false
+                    - option: let myVar = 5;
+                      is_correct: true
+                    - option: newVar myVar = 5;
+                      is_correct: false
+                - question_text: Which of the following is not a JavaScript data type?
+                  options:
+                    - option: Number
+                      is_correct: false
+                    - option: String
+                      is_correct: false
+                    - option: Boolean
+                      is_correct: false
+                    - option: Float
+                      is_correct: true
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-quiz-by-id/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The quiz ID
+    get:
+      tags:
+        - Course Quizzes
+      summary: Get Quiz By Id
+      operationId: GetQuizById
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-all-quiz:
+    get:
+      tags:
+        - Course Quizzes
+      summary: Get All Quiz
+      operationId: GetAllQuiz
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/update-quiz-question/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The quiz ID
+    patch:
+      tags:
+        - Course Quizzes
+      summary: Update Quiz
+      operationId: UpdateQuiz
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/UpdateQuizRequest'
+                - example:
+                    quizId: 60c72b2f9b1d8b3a1c8a4e3a
+                    title: Updated Quiz Title
+                    questions:
+                      - questionId: 60c72b2f9b1d8b3a1c8a4e3b
+                        question_text: What is the capital of France?
+                        options:
+                          - option: Paris
+                            is_correct: true
+                          - option: Berlin
+                            is_correct: false
+            example:
+              quizId: 60c72b2f9b1d8b3a1c8a4e3a
+              title: Updated Quiz Title
+              questions:
+                - questionId: 60c72b2f9b1d8b3a1c8a4e3b
+                  question_text: What is the capital of France?
+                  options:
+                    - option: Paris
+                      is_correct: true
+                    - option: Berlin
+                      is_correct: false
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/delete-quiz-question/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The quiz ID
+    delete:
+      tags:
+        - Course Quizzes
+      summary: Delete Quiz
+      operationId: DeleteQuiz
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/submit-quiz:
+    post:
+      tags:
+        - Quiz
+      summary: Submit Quiz
+      operationId: SubmitQuiz
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/SubmitQuizRequest'
+                - example:
+                    course_id: 1234567890abcdef12345678
+                    quiz_id: quizId_here
+                    answers:
+                      - question_id: questionId_here
+                        selected_option: option1
+                      - question_id: questionId_here
+                        selected_option: option2
+            example:
+              course_id: 1234567890abcdef12345678
+              quiz_id: quizId_here
+              answers:
+                - question_id: questionId_here
+                  selected_option: option1
+                - question_id: questionId_here
+                  selected_option: option2
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-course-quiz/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The course ID
+    get:
+      tags:
+        - Quiz
+      summary: Get Course Quiz
+      operationId: GetCourseQuiz
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-quiz-result:
+    get:
+      tags:
+        - Quiz
+      summary: Get Quiz Result
+      operationId: GetQuizResult
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/add-course-rating:
+    post:
+      tags:
+        - Student Rating
+      summary: Add rating
+      operationId: Add rating
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/AddratingRequest'
+                - example:
+                    course_id: 1234567890abcdef12345678
+                    rating: 5
+                    comment: Great course!
+            example:
+              course_id: 1234567890abcdef12345678
+              rating: 5
+              comment: Great course!
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/update-course-rating:
+    put:
+      tags:
+        - Student Rating
+      summary: update Rating
+      operationId: updateRating
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/updateRatingRequest'
+                - example:
+                    course_id: 1234567890abcdef12345678
+                    rating: 4
+                    comment: Updated my rating.
+            example:
+              course_id: 1234567890abcdef12345678
+              rating: 4
+              comment: Updated my rating.
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/delete-course-rating:
+    delete:
+      tags:
+        - Student Rating
+      summary: Delete My Rating
+      operationId: DeleteMyRating
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/enroll-course:
+    post:
+      tags:
+        - Student Courses
+      summary: Course Enroll
+      operationId: CourseEnroll
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/CourseEnrollRequest'
+                - example:
+                    course_id: 1234567890abcdef12345678
+            example:
+              course_id: 1234567890abcdef12345678
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-all-enrolled-courses:
+    get:
+      tags:
+        - Student Courses
+      summary: Get All Enrolled Course
+      operationId: GetAllEnrolledCourse
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-course-enrolled-by-id/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: course Id
+    get:
+      tags:
+        - Student Courses
+      summary: Get Single Enrolled Course By Id
+      operationId: GetSingleEnrolledCourseById
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-course-enrolled:
+    get:
+      tags:
+        - Student Courses
+      summary: Get Course Enrolled
+      operationId: GetCourseEnrolled
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-course-content/{course_id}:
+    get:
+      tags:
+        - Student Courses
+      summary: Get Course Content
+      operationId: GetCourseContent
+      parameters:
+        - name: course_id
+          in: path
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/completed-lessons:
+    post:
+      tags:
+        - Student Course Progress
+      summary: Lesson Is Completed
+      operationId: LessonIsCompleted
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/LessonIsCompletedRequest'
+                - example:
+                    course_id: 1234567890abcdef12345678
+                    lessonId: lessonId_here
+            example:
+              course_id: 1234567890abcdef12345678
+              lessonId: lessonId_here
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-course-progress:
+    get:
+      tags:
+        - Student Course Progress
+      summary: Get course Progress
+      operationId: GetcourseProgress
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/delete-course-in-cart/{courseId}:
+    delete:
+      tags:
+        - Cart
+      summary: Delete Course in Cart
+      operationId: DeleteCourseinCart
+      parameters:
+        - name: courseId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-course-in-cart:
+    get:
+      tags:
+        - Cart
+      summary: Get All  Courses in Cart
+      operationId: GetAllCoursesinCart
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/get-single-course-in-cart/{courseId}:
+    get:
+      tags:
+        - Cart
+      summary: Get Single Course in Cart
+      operationId: GetSingleCourseinCart
+      parameters:
+        - name: courseId
+          in: path
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/course-announcement:
+    get:
+      tags:
+        - Course Annoucements
+      summary: Get Course Annoucemnts
+      operationId: GetCourseAnnoucemnts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /v1/easybuy/categories:
+    post:
+      tags:
+        - EasyBuy Categories
+      summary: Create a new EasyBuy category
+      operationId: createEasyBuyCategory
+      security:
+        - bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  description: Name of the category
+              example:
+                name: 'Electronics'
+      responses:
+        '200':
+          description: Category created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Created EasyBuy Category
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                        example: '65f1a2b3c4d5e6f7g8h9i0j1'
+                      name:
+                        type: string
+                        example: 'Electronics'
+        '400':
+          description: Bad request - Invalid input data
+        '401':
+          description: Unauthorized - Invalid or missing authentication token
+        '403':
+          description: Forbidden - User does not have required role
+  /v1/easybuy/partner/products:
+    post:
+      tags:
+        - EasyBuy Partner
+      summary: Create a new EasyBuy product
+      operationId: createEasyBuyProduct
+      security:
+        - bearer: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - name
+                - description
+                - price
+                - category
+                - stock
+                - image
+              properties:
+                name:
+                  type: string
+                  description: Name of the product
+                description:
+                  type: string
+                  description: Detailed description of the product
+                price:
+                  type: number
+                  description: Price of the product
+                color:
+                  type: array
+                  items:
+                    type: string
+                  description: Available colors for the product
+                category:
+                  type: string
+                  description: Category ID of the product
+                stock:
+                  type: integer
+                  description: Available stock quantity
+                image:
+                  type: string
+                  format: binary
+                  description: Main product image
+                additionalImages:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                  description: Additional product images (optional)
+      responses:
+        '200':
+          description: Product created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Created EasyBuy Product
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      price:
+                        type: number
+                      color:
+                        type: array
+                        items:
+                          type: string
+                      imageKey:
+                        type: string
+                      additionalImageKeys:
+                        type: array
+                        items:
+                          type: string
+                      stock:
+                        type: integer
+                      category:
+                        type: string
+                      partner:
+                        type: string
+        '400':
+          description: Bad request - Invalid input data
+        '401':
+          description: Unauthorized - Invalid or missing authentication token
+        '403':
+          description: Forbidden - User is not an EasyBuy Partner
+components:
+  schemas:
+    RegisterasTutorRequest:
+      title: RegisterasTutorRequest
+      required:
+        - firstName
+        - lastName
+        - password
+        - phone
+        - email
+        - country
+        - state
+        - address
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        password:
+          type: string
+        phone:
+          type: integer
+          format: int32
+        email:
+          type: string
+        country:
+          type: string
+        state:
+          type: string
+        address:
+          type: string
+      example:
+        firstName: John
+        lastName: Doe
+        password: password123
+        phone: 1234567890
+        email: john.doe@example.com
+        country: Nigeria
+        state: Lagos
+        address: 123 Example Street, Lagos
+    registeruserrequest:
+      title: registeruserrequest
+      required:
+        - firstName
+        - lastName
+        - password
+        - phone
+        - email
+        - country
+        - state
+        - address
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        password:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        country:
+          type: string
+        state:
+          type: string
+        address:
+          type: string
+      example:
+        firstName: john
+        lastName: Doe
+        password: wisdom
+        phone: '2348001234562'
+        email: john.do@exampl.com
+        country: Nigeria
+        state: Lagos
+        address: 123 Example Street, Victoria Island
+    RegisterasSuperAdminRequest:
+      title: RegisterasSuperAdminRequest
+      required:
+        - firstName
+        - lastName
+        - password
+        - phone
+        - email
+        - country
+        - state
+        - address
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        password:
+          type: string
+        phone:
+          type: integer
+          format: int64
+        email:
+          type: string
+        country:
+          type: string
+        state:
+          type: string
+        address:
+          type: string
+      example:
+        firstName: Jane
+        lastName: Smith
+        password: superAdminPass123
+        phone: 9876543210
+        email: jane.smith@example.com
+        country: Nigeria
+        state: Abuja
+        address: 456 Admin Street, Abuja
+    loginuserrequest:
+      title: loginuserrequest
+      required:
+        - phone
+        - password
+      type: object
+      properties:
+        phone:
+          type: string
+        password:
+          type: string
+      example:
+        phone: '2347052316803'
+        password: wisdom
+    forgetpasswordrequest:
+      title: forgetpasswordrequest
+      required:
+        - email
+      type: object
+      properties:
+        email:
+          type: string
+      example:
+        email: marvelloussolomon49@gmail.com
+    resetpasswordrequest:
+      title: resetpasswordrequest
+      required:
+        - email
+        - token
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        token:
+          type: string
+        password:
+          type: string
+      example:
+        email: marvelloussolomon49@gmail.com
+        token: a3091dda44767000836f2d8cd768f0e0
+        password: marvel12
+    RegisterBvnforvirtualaccountsRequest:
+      title: RegisterBvnforvirtualaccountsRequest
+      required:
+        - bvn
+      type: object
+      properties:
+        bvn:
+          type: integer
+          format: int64
+      example:
+        bvn: 22517534849
+    SetTransactionpinRequest:
+      title: SetTransactionpinRequest
+      required:
+        - pin
+      type: object
+      properties:
+        pin:
+          type: string
+      example:
+        pin: '1234'
+    changeEmailRequest:
+      title: changeEmailRequest
+      required:
+        - email
+      type: object
+      properties:
+        email:
+          type: string
+      example:
+        email: marvelloussolomon49@gmail.com
+    changepasswordrequest:
+      title: changepasswordrequest
+      required:
+        - currentPassword
+        - newPassword
+      type: object
+      properties:
+        currentPassword:
+          type: string
+        newPassword:
+          type: string
+      example:
+        currentPassword: '123432'
+        newPassword: '243423'
+    BuyDataRequest:
+      title: BuyDataRequest
+      required:
+        - network
+        - mobile_number
+        - plan
+      type: object
+      properties:
+        network:
+          type: integer
+          format: int32
+        mobile_number:
+          type: string
+        plan:
+          type: integer
+          format: int32
+      example:
+        network: 1
+        mobile_number: '09095263835'
+        plan: 364
+    BuyElectricityRequest:
+      title: BuyElectricityRequest
+      required:
+        - disco_name
+        - amount
+        - meter_number
+        - MeterType
+      type: object
+      properties:
+        disco_name:
+          type: string
+        amount:
+          type: integer
+          format: int32
+        meter_number:
+          type: integer
+          format: int64
+        MeterType:
+          type: string
+      example:
+        disco_name: KEDCO
+        amount: 500
+        meter_number: 12345678909876543
+        MeterType: POSTPAID
+    BuyCableandgetalltransactionRequest:
+      title: BuyCableandgetalltransactionRequest
+      required:
+        - cablename
+        - cableplan
+        - smart_card_number
+      type: object
+      properties:
+        cablename:
+          type: string
+        cableplan:
+          type: string
+        smart_card_number:
+          type: integer
+          format: int32
+      example:
+        cablename: GOTV
+        cableplan: '74'
+        smart_card_number: 234567890
+    purchaseairtimerequest:
+      title: purchaseairtimerequest
+      required:
+        - phone
+        - network_id
+        - amount
+      type: object
+      properties:
+        phone:
+          type: string
+        network_id:
+          type: string
+        amount:
+          type: string
+      example:
+        phone: '09072336259'
+        network_id: mtn
+        amount: '100'
+    purchaseDataRequest:
+      title: purchaseDataRequest
+      required:
+        - phone
+        - network_id
+        - variation_id
+        - amount
+      type: object
+      properties:
+        phone:
+          type: string
+        network_id:
+          type: string
+        variation_id:
+          type: string
+        amount:
+          type: string
+      example:
+        phone: '07045461790'
+        network_id: mtn
+        variation_id: M1024
+        amount: '1000'
+    purchaseElectricityRequest:
+      title: purchaseElectricityRequest
+      required:
+        - phone
+        - meter_number
+        - service_id
+        - variation_id
+        - amount
+      type: object
+      properties:
+        phone:
+          type: string
+        meter_number:
+          type: string
+        service_id:
+          type: string
+        variation_id:
+          type: string
+        amount:
+          type: string
+      example:
+        phone: '09072336259'
+        meter_number: '62418234034'
+        service_id: ikeja-electric
+        variation_id: prepaid
+        amount: '1000'
+    verifyCustomerRequest:
+      title: verifyCustomerRequest
+      required:
+        - customer_id
+        - service_id
+        - variation_id
+      type: object
+      properties:
+        customer_id:
+          type: string
+        service_id:
+          type: string
+        variation_id:
+          type: string
+      example:
+        customer_id: 4567io0
+        service_id: ikeja-electric
+        variation_id: prepaid
+    purchaseCableTVRequest:
+      title: purchaseCableTVRequest
+      required:
+        - phone
+        - smartcard_number
+        - service_id
+        - variation_id
+      type: object
+      properties:
+        phone:
+          type: string
+        smartcard_number:
+          type: string
+        service_id:
+          type: string
+        variation_id:
+          type: string
+      example:
+        phone: '09072336259'
+        smartcard_number: '23456789876543'
+        service_id: gotv
+        variation_id: gotv-max
+    changeVTUaccountRequest:
+      title: changeVTUaccountRequest
+      required:
+        - vtu
+      type: object
+      properties:
+        vtu:
+          type: integer
+          format: int32
+      example:
+        vtu: 1
+    paywithflutterwaverequest:
+      title: paywithflutterwaverequest
+      required:
+        - amount
+      type: object
+      properties:
+        amount:
+          type: string
+      example:
+        amount: '100'
+    TransferFromWalletRequest:
+      title: TransferFromWalletRequest
+      required:
+        - amount
+        - account_number
+        - narration
+        - account_bank
+      type: object
+      properties:
+        amount:
+          type: string
+        account_number:
+          type: string
+        narration:
+          type: string
+        account_bank:
+          type: string
+      example:
+        amount: '100'
+        account_number: '2284474186'
+        narration: payment for things
+        account_bank: '057'
+    airtimetocashrequest:
+      title: airtimetocashrequest
+      required:
+        - amount
+        - network
+        - phone
+      type: object
+      properties:
+        amount:
+          type: integer
+          format: int32
+        network:
+          type: integer
+          format: int32
+        phone:
+          type: string
+      example:
+        amount: 5000
+        network: 1
+        phone: '07061785113'
+    networkfeerequest:
+      title: networkfeerequest
+      required:
+        - amount
+        - network
+      type: object
+      properties:
+        amount:
+          type: integer
+          format: int32
+        network:
+          type: integer
+          format: int32
+      example:
+        amount: 5000
+        network: 4
+    addcoursecontentrequest:
+      title: addcoursecontentrequest
+      required:
+        - title
+        - description
+        - duration
+        - price
+        - discount_price
+        - category
+        - sections
+        - tags
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        duration:
+          type: string
+        price:
+          type: string
+        discount_price:
+          type: integer
+          format: int32
+        category:
+          type: string
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Section'
+          description: ''
+        tags:
+          type: array
+          items:
+            type: string
+          description: ''
+      example:
+        title: Introduction to Programming in python
+        description: A comprehensive course on programming fundamentals and patterns.
+        duration: 9 hours
+        price: '100'
+        discount_price: 10
+        category: Data structures
+        sections:
+          - title: 'Section 1: Basics'
+            description: Introduction to basic programming concepts.
+            lessons:
+              - title: What is data structures?
+                videoUrl: course-videos/chowgoo.mp4eb99400c
+                duration: 15
+                order: 1
+              - title: Variables and Data Types
+                videoUrl: https://example.com/video2
+                duration: 10
+                order: 2
+        tags:
+          - programming
+          - coding
+          - development
+    Section:
+      title: Section
+      required:
+        - title
+        - description
+        - lessons
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        lessons:
+          type: array
+          items:
+            $ref: '#/components/schemas/Lesson'
+          description: ''
+      example:
+        title: 'Section 1: Basics'
+        description: Introduction to basic programming concepts.
+        lessons:
+          - title: What is data structures?
+            videoUrl: course-videos/chowgoo.mp4eb99400c
+            duration: 15
+            order: 1
+          - title: Variables and Data Types
+            videoUrl: https://example.com/video2
+            duration: 10
+            order: 2
+    Lesson:
+      title: Lesson
+      required:
+        - title
+        - videoUrl
+        - duration
+        - order
+      type: object
+      properties:
+        title:
+          type: string
+        videoUrl:
+          type: string
+        duration:
+          type: integer
+          format: int32
+        order:
+          type: integer
+          format: int32
+      example:
+        title: What is data structures?
+        videoUrl: course-videos/chowgoo.mp4eb99400c
+        duration: 15
+        order: 1
+    AddcoursetoexistingcoursesectionsandlessonRequest:
+      title: AddcoursetoexistingcoursesectionsandlessonRequest
+      required:
+        - courseId
+        - sections
+      type: object
+      properties:
+        courseId:
+          type: string
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Section1'
+          description: ''
+      example:
+        courseId: 66f28739fe0e9466de66e39c
+        sections:
+          - sectionId: 66f28739fe0e9466de66e39e
+            lessons:
+              - title: Introduction to Programming in JAVA
+                videoUrl: https://example.com/video1
+                duration: 300
+                order: 1
+              - title: Variables and Data Types in GO
+                videoUrl: https://example.com/video2
+                duration: 450
+                order: 2
+    Section1:
+      title: Section1
+      required:
+        - sectionId
+        - lessons
+      type: object
+      properties:
+        sectionId:
+          type: string
+        lessons:
+          type: array
+          items:
+            $ref: '#/components/schemas/Lesson'
+          description: ''
+      example:
+        sectionId: 66f28739fe0e9466de66e39e
+        lessons:
+          - title: Introduction to Programming in JAVA
+            videoUrl: https://example.com/video1
+            duration: 300
+            order: 1
+          - title: Variables and Data Types in GO
+            videoUrl: https://example.com/video2
+            duration: 450
+            order: 2
+    replytocoursequestionsrequest:
+      title: replytocoursequestionsrequest
+      required:
+        - reply
+      type: object
+      properties:
+        reply:
+          type: string
+      example:
+        reply: you need to work harder
+    create-course-tutor-profile-request:
+      title: create-course-tutor-profile-request
+      required:
+        - tutor_name
+        - tutor_email
+        - tutor_phone
+        - tutor_about
+        - tutor_image
+        - tutor_qualification
+        - tutor_experience
+        - tutor_achievements
+        - tutor_facebook
+        - tutor_twitter
+        - tutor_linkedin
+        - tutor_instagram
+      type: object
+      properties:
+        tutor_name:
+          type: string
+        tutor_email:
+          type: string
+        tutor_phone:
+          type: string
+        tutor_about:
+          type: string
+        tutor_image:
+          type: string
+        tutor_qualification:
+          type: string
+        tutor_experience:
+          type: string
+        tutor_achievements:
+          type: string
+        tutor_facebook:
+          type: string
+        tutor_twitter:
+          type: string
+        tutor_linkedin:
+          type: string
+        tutor_instagram:
+          type: string
+      example:
+        tutor_name: John Doe
+        tutor_email: john.doe@example.com
+        tutor_phone: '08012345678'
+        tutor_about: Experienced tutor specializing in math and science education.
+        tutor_image: https://example.com/images/john_doe.jpg
+        tutor_qualification: MSc in Education
+        tutor_experience: 10 years of teaching experience in various schools and online platforms.
+        tutor_achievements: Published research on modern teaching techniques, awarded 'Best Tutor 2023'.
+        tutor_facebook: https://facebook.com/john.doe
+        tutor_twitter: https://twitter.com/johndoe
+        tutor_linkedin: https://linkedin.com/in/johndoe
+        tutor_instagram: https://instagram.com/johndoe
+    createCourseAnnoucementRequest:
+      title: createCourseAnnoucementRequest
+      required:
+        - courseId
+        - title
+        - description
+      type: object
+      properties:
+        courseId:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+      example:
+        courseId: 6123abcd4567ef8912345678
+        title: Course Title
+        description: This is the course description
+    AddCoursequizRequest:
+      title: AddCoursequizRequest
+      required:
+        - course_id
+        - section_id
+        - lesson_id
+        - quiz_title
+        - questions
+      type: object
+      properties:
+        course_id:
+          type: string
+        section_id:
+          type: string
+        lesson_id:
+          type: string
+        quiz_title:
+          type: string
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+          description: ''
+      example:
+        course_id: 66f28739fe0e9466de66e39c
+        section_id: 66f28739fe0e9466de66e39e
+        lesson_id: 66f28739fe0e9466de66e3a0
+        quiz_title: Sample Quiz on JavaScript Basics
+        questions:
+          - question_text: What is the correct way to declare a variable in JavaScript?
+            options:
+              - option: var myVar = 5;
+                is_correct: true
+              - option: declare myVar = 5;
+                is_correct: false
+              - option: let myVar = 5;
+                is_correct: true
+              - option: newVar myVar = 5;
+                is_correct: false
+          - question_text: Which of the following is not a JavaScript data type?
+            options:
+              - option: Number
+                is_correct: false
+              - option: String
+                is_correct: false
+              - option: Boolean
+                is_correct: false
+              - option: Float
+                is_correct: true
+    Question:
+      title: Question
+      required:
+        - question_text
+        - options
+      type: object
+      properties:
+        question_text:
+          type: string
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/Option'
+          description: ''
+      example:
+        question_text: What is the correct way to declare a variable in JavaScript?
+        options:
+          - option: var myVar = 5;
+            is_correct: true
+          - option: declare myVar = 5;
+            is_correct: false
+          - option: let myVar = 5;
+            is_correct: true
+          - option: newVar myVar = 5;
+            is_correct: false
+    Option:
+      title: Option
+      required:
+        - option
+        - is_correct
+      type: object
+      properties:
+        option:
+          type: string
+        is_correct:
+          type: boolean
+      example:
+        option: var myVar = 5;
+        is_correct: true
+    UpdateQuizRequest:
+      title: UpdateQuizRequest
+      required:
+        - quizId
+        - title
+        - questions
+      type: object
+      properties:
+        quizId:
+          type: string
+        title:
+          type: string
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question1'
+          description: ''
+      example:
+        quizId: 60c72b2f9b1d8b3a1c8a4e3a
+        title: Updated Quiz Title
+        questions:
+          - questionId: 60c72b2f9b1d8b3a1c8a4e3b
+            question_text: What is the capital of France?
+            options:
+              - option: Paris
+                is_correct: true
+              - option: Berlin
+                is_correct: false
+    Question1:
+      title: Question1
+      required:
+        - questionId
+        - question_text
+        - options
+      type: object
+      properties:
+        questionId:
+          type: string
+        question_text:
+          type: string
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/Option'
+          description: ''
+      example:
+        questionId: 60c72b2f9b1d8b3a1c8a4e3b
+        question_text: What is the capital of France?
+        options:
+          - option: Paris
+            is_correct: true
+          - option: Berlin
+            is_correct: false
+    SubmitQuizeRequest:
+      title: SubmitQuizeRequest
+      required:
+        - course_id
+        - quiz_id
+        - answers
+      type: object
+      properties:
+        course_id:
+          type: string
+        quiz_id:
+          type: string
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Answer'
+          description: ''
+      example:
+        course_id: 1234567890abcdef12345678
+        quiz_id: quizId_here
+        answers:
+          - question_id: questionId_here
+            selected_option: option1
+          - question_id: questionId_here
+            selected_option: option2
+    Answer:
+      title: Answer
+      required:
+        - question_id
+        - selected_option
+      type: object
+      properties:
+        question_id:
+          type: string
+        selected_option:
+          type: string
+      example:
+        question_id: questionId_here
+        selected_option: option1
+    AddratingRequest:
+      title: AddratingRequest
+      required:
+        - course_id
+        - rating
+        - comment
+      type: object
+      properties:
+        course_id:
+          type: string
+        rating:
+          type: integer
+          format: int32
+        comment:
+          type: string
+      example:
+        course_id: 1234567890abcdef12345678
+        rating: 5
+        comment: Great course!
+    updateRatingRequest:
+      title: updateRatingRequest
+      required:
+        - course_id
+        - rating
+        - comment
+      type: object
+      properties:
+        course_id:
+          type: string
+        rating:
+          type: integer
+          format: int32
+        comment:
+          type: string
+      example:
+        course_id: 1234567890abcdef12345678
+        rating: 4
+        comment: Updated my rating.
+    DeleteMyRatingRequest:
+      title: DeleteMyRatingRequest
+      required:
+        - course_id
+      type: object
+      properties:
+        course_id:
+          type: string
+      example:
+        course_id: 1234567890abcdef12345678
+    CourseEnrollRequest:
+      title: CourseEnrollRequest
+      required:
+        - course_id
+      type: object
+      properties:
+        course_id:
+          type: string
+      example:
+        course_id: 1234567890abcdef12345678
+    LessonIsCompletedRequest:
+      title: LessonIsCompletedRequest
+      required:
+        - course_id
+        - lessonId
+      type: object
+      properties:
+        course_id:
+          type: string
+        lessonId:
+          type: string
+      example:
+        course_id: 1234567890abcdef12345678
+        lessonId: lessonId_here
+    updateTransactionPinRequest:
+      title: updateTransactionPinRequest
+      required:
+        - currentPin
+        - newPin
+      type: object
+      properties:
+        currentPin:
+          type: string
+        newPin:
+          type: string
+      example:
+        currentPin: '1234'
+        newPin: '5678'
+    GenerateDepositCheckoutUrlRequest:
+      title: GenerateDepositCheckoutUrlRequest
+      required:
+        - amount
+      type: object
+      properties:
+        amount:
+          type: number
+          description: Amount to deposit in Naira
+        merchant:
+          type: string
+          enum: [paystack]
+          description: Payment merchant to use
+          default: paystack
+      example:
+        amount: 1000
+        merchant: paystack
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+    apiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+security:
+  - bearer: []
+tags:
+  - name: Tutors
+  - name: User
+  - name: Admin
+  - name: user Auth
+  - name: Settings
+  - name: Bill Payment - Gongozo
+  - name: VTU.ng
+  - name: Account VTU Permission
+  - name: FlutterWave Payment
+  - name: Artime to cash with bingPay
+  - name: Courses
+  - name: Tutor Profile
+  - name: Announcements
+  - name: Course Quizes
+  - name: Quiz
+  - name: Student Rating
+  - name: Student Courses
+  - name: Student Course Progress
+  - name: Cart
+  - name: Course Annoucements

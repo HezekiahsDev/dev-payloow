@@ -1,0 +1,40 @@
+# docker-compose.dev.yaml
+# This file defines the development services needed for the application.
+# It includes both Redis and MongoDB.
+
+version: '3.8'
+
+services:
+  # Redis service for caching and session management
+  redis:
+    image: redis:latest
+    container_name: payload-redis
+    ports:
+      - '6379:6379' # Maps container port 6379 to host port 6379
+    volumes:
+      - payload-redis-data:/data # Persists Redis data
+    networks:
+      - app-network
+
+  # MongoDB service for the main database
+  mongo:
+    image: mongo:latest
+    container_name: payload-mongo
+    ports:
+      - '27017:27017' # Maps container port 27017 to host port 27017
+    volumes:
+      - payload-mongo-data:/data/db # Persists MongoDB data
+    networks:
+      - app-network
+
+# Volumes definition for data persistence
+volumes:
+  payload-redis-data:
+    driver: local
+  payload-mongo-data:
+    driver: local
+
+# Network definition for inter-service communication
+networks:
+  app-network:
+    driver: bridge
