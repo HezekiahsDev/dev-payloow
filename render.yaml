@@ -1,0 +1,122 @@
+services:
+  - type: web
+    name: payloow-api
+    runtime: node
+    plan: starter
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:prod
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      # Database Configuration
+      - key: MONGO_URL
+        fromDatabase:
+          name: payloow-mongodb
+          property: connectionString
+      - key: ONLINE_DB
+        fromDatabase:
+          name: payloow-mongodb
+          property: connectionString
+      - key: OFFLINE_DB
+        fromDatabase:
+          name: payloow-mongodb
+          property: connectionString
+
+      # Frontend Configuration
+      - key: FRONTEND_URL
+        value: '*'
+      - key: ORIGIN
+        value: '*'
+
+      # Base URL for the API
+      - key: BASE_URL
+        value: https://api.flutterwave.com
+
+      # Payment Gateway - Flutterwave (Add your actual keys in Render dashboard)
+      - key: FLUTTERWAVE_PUBLIC_KEY
+        sync: false
+      - key: FLUTTERWAVE_SECRET_KEY
+        sync: false
+      - key: FLUTTERWAVE_ENCRYPTION_KEY
+        sync: false
+
+      # Payment Gateway - Paystack (Add your actual key in Render dashboard)
+      - key: PAYSTACK_API_KEY
+        sync: false
+
+      # VTU Configuration (Add your actual credentials in Render dashboard)
+      - key: VTU_USERNAME
+        sync: false
+      - key: VTU_PASSWORD
+        sync: false
+      - key: VTU_BASE_URL
+        sync: false
+
+      # BingPay API Key (Add in Render dashboard)
+      - key: BINGPAY_API_KEY
+        sync: false
+
+      # Cloudinary Configuration (Add your actual credentials in Render dashboard)
+      - key: CLOUDNAME
+        sync: false
+      - key: API_KEY
+        sync: false
+      - key: API_SECRET
+        sync: false
+
+      # AWS Configuration (Add your actual credentials in Render dashboard)
+      - key: ACCESS_KEY
+        sync: false
+      - key: SECRET_KEY
+        sync: false
+      - key: REGION
+        sync: false
+      - key: BUCKET_NAME
+        sync: false
+      - key: CLOUD_FRONT_DOMAIN
+        sync: false
+
+      # Mail Configuration (Add your actual credentials in Render dashboard)
+      - key: MAIL_HOST
+        sync: false
+      - key: MAIL_PORT
+        value: 587
+      - key: MAIL_USERNAME
+        sync: false
+      - key: MAIL_PASSWORD
+        sync: false
+      - key: DEFAULT_EMAIL_FROM
+        sync: false
+      - key: SECURE
+        value: 'true'
+
+      # Redis Configuration
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: payloow-redis
+          property: connectionString
+
+      # JWT Secret (Add in Render dashboard)
+      - key: JWT_SECRET
+        sync: false
+
+      # Gonzo API Token (Add in Render dashboard)
+      - key: GONZO_CONCEPTS_SECRET
+        sync: false
+
+  # Redis service for caching
+  - type: redis
+    name: payloow-redis
+    plan: starter
+    maxmemoryPolicy: allkeys-lru
+    ipAllowList: []
+
+databases:
+  - name: payloow-mongodb
+    databaseName: payloow
+    user: payloow_user
+    plan: starter
