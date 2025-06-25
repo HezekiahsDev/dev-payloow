@@ -4,7 +4,7 @@
   "description": "Backend Implementation for Revo App written in NodeJS, Typescript, ExpressJS, MongoDB",
   "main": "index.js",
   "scripts": {
-    "clean": "rm ./dist",
+    "clean": "rm -rf ./dist",
     "start:prod": "node ./dist/index.js",
     "start:dev": "cross-env DEV=development nodemon ./src/index.ts",
     "build": "npm run clean && tsc",
